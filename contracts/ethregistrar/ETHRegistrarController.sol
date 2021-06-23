@@ -50,7 +50,7 @@ contract ETHRegistrarController is Ownable {
     }
 
     function valid(string memory name) public pure returns(bool) {
-        return name.strlen() >= 3;
+        return name.strlen() >= 1;
     }
 
     function available(string memory name) public view returns(bool) {

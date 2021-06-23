@@ -51,21 +51,24 @@ contract('ETHRegistrarController', function (accounts) {
         "five5": true,
         "four": true,
         "iii": true,
-        "ii": false,
-        "i": false,
+        "ii": true,
+        "i": true,
         "": false,
 
         // { ni } { hao } { ma } (chinese; simplified)
         "\u4f60\u597d\u5417": true,
 
         // { ta } { ko } (japanese; hiragana)
-        "\u305f\u3053": false,
+        "\u305f\u3053": true,
 
         // { poop } { poop } { poop } (emoji)
         "\ud83d\udca9\ud83d\udca9\ud83d\udca9": true,
 
         // { poop } { poop } (emoji)
-        "\ud83d\udca9\ud83d\udca9": false
+        "\ud83d\udca9\ud83d\udca9": true,
+
+        // { poop } (emoji)
+        "\ud83d\udca9": true
     };
 
     it('should report label validity', async () => {
