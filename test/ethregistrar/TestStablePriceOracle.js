@@ -16,21 +16,23 @@ contract('StablePriceOracle', function (accounts) {
 
         // Dummy oracle with 1 ETH == 10 USD
         var dummyOracle = await DummyOracle.new(toBN(1000000000));
-        // 4 attousd per second for 3 character names, 2 attousd per second for 4 character names,
-        // 1 attousd per second for longer names.
-        priceOracle = await StablePriceOracle.new(dummyOracle.address, [0, 0, 4, 2, 1]);
+        // 400 attousd for 3 character names, 200 attousd for 4 character names,
+        // 100 attousd for longer names.
+        priceOracle = await StablePriceOracle.new(dummyOracle.address, [800, 600, 400, 200, 100]);
     });
 
     it('should return correct prices', async () => {
-        assert.equal((await priceOracle.price("foo", 0, 3600)).toNumber(), 1440);
-        assert.equal((await priceOracle.price("quux", 0, 3600)).toNumber(), 720);
-        assert.equal((await priceOracle.price("fubar", 0, 3600)).toNumber(), 360);
-        assert.equal((await priceOracle.price("foobie", 0, 3600)).toNumber(), 360);
+        assert.equal((await priceOracle.price("a")).toNumber(), 80);
+        assert.equal((await priceOracle.price("cc")).toNumber(), 60);
+        assert.equal((await priceOracle.price("foo")).toNumber(), 40);
+        assert.equal((await priceOracle.price("quux")).toNumber(), 20);
+        assert.equal((await priceOracle.price("fubar")).toNumber(), 10);
+        assert.equal((await priceOracle.price("foobie")).toNumber(), 10);
     });
 
     it('should work with larger values', async () => {
-        // 1 USD per second!
-        await priceOracle.setPrices([toBN("1000000000000000000")]);
-        assert.equal((await priceOracle.price("foo", 0, 86400)).toString(), "8640000000000000000000");
+        // 10 million USD!
+        await priceOracle.setPrices([toBN("10000000000000000000000000")]);
+        assert.equal((await priceOracle.price("foo")).toString(), "1000000000000000000000000");
     })
 });

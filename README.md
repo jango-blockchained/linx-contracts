@@ -1,6 +1,6 @@
-# ENS
+# .forever contracts
 
-[![Build Status](https://travis-ci.org/ensdomains/ens-contracts.svg?branch=master)](https://travis-ci.org/ensdomains/ens-contracts)
+This is a fork of [ens contracts](https://github.com/ensdomains/ens-contracts) that allows you to register your name once and own it forever without the need for renewals.
 
 For documentation of the ENS system, see [docs.ens.domains](https://docs.ens.domains/).
 
@@ -12,13 +12,11 @@ This repo doubles as an npm package with the compiled JSON contracts
 import {
   BaseRegistrar,
   BaseRegistrarImplementation,
-  BulkRenewal,
   ENS,
   ENSRegistry,
   ENSRegistryWithFallback,
   ETHRegistrarController,
   FIFSRegistrar,
-  LinearPremiumPriceOracle,
   PriceOracle,
   PublicResolver,
   Resolver,
@@ -40,10 +38,8 @@ import 'ensdomains-ens-contracts/contracts/registry/TestRegistrar.sol';
 // EthRegistrar
 import 'ensdomains-ens-contracts/contracts/ethregistrar/BaseRegistrar.sol';
 import 'ensdomains-ens-contracts/contracts/ethregistrar/BaseRegistrarImplementation.sol';
-import 'ensdomains-ens-contracts/contracts/ethregistrar/BulkRenewal.sol';
 import 'ensdomains-ens-contracts/contracts/ethregistrar/BaseRegistrar.sol';
 import 'ensdomains-ens-contracts/contracts/ethregistrar/ETHRegistrarController.sol';
-import 'ensdomains-ens-contracts/contracts/ethregistrar/LinearPremiumPriceOracle.sol';
 import 'ensdomains-ens-contracts/contracts/ethregistrar/PriceOracle.sol';
 import 'ensdomains-ens-contracts/contracts/ethregistrar/StablePriceOracle.sol';
 // Resolvers
@@ -99,21 +95,20 @@ These contracts were audited by ConsenSys dilligence; the audit report is availa
 BaseRegistrar is the contract that owns the TLD in the ENS registry. This contract implements a minimal set of functionality:
 
  - The owner of the registrar may add and remove controllers.
- - Controllers may register new domains and extend the expiry of (renew) existing domains. They can not change the ownership or reduce the expiration time of existing domains.
+ - Controllers may register new domains. They can not change the ownership of existing domains.
  - Name owners may transfer ownership to another address.
  - Name owners may reclaim ownership in the ENS registry if they have lost it.
  - Owners of names in the interim registrar may transfer them to the new registrar, during the 1 year transition period. When they do so, their deposit is returned to them in its entirety.
 
-This separation of concerns provides name owners strong guarantees over continued ownership of their existing names, while still permitting innovation and change in the way names are registered and renewed via the controller mechanism.
+This separation of concerns provides name owners strong guarantees over continued ownership of their existing names, while still permitting innovation and change in the way names are registered via the controller mechanism.
 
 ### EthRegistrarController
 
 EthRegistrarController is the first implementation of a registration controller for the new registrar. This contract implements the following functionality:
 
- - The owner of the registrar may set a price oracle contract, which determines the cost of registrations and renewals based on the name and the desired registration or renewal duration.
+ - The owner of the registrar may set a price oracle contract, which determines the cost of registrations based on the name.
  - The owner of the registrar may withdraw any collected funds to their account.
  - Users can register new names using a commit/reveal process and by paying the appropriate registration fee.
- - Users can renew a name by paying the appropriate fee. Any user may renew a domain, not just the name's owner.
 
 The commit/reveal process is used to avoid frontrunning, and operates as follows:
 

@@ -15,48 +15,48 @@ contract StablePriceOracle is Ownable, PriceOracle {
     using SafeMath for *;
     using StringUtils for *;
 
-    // Rent in base price units by length. Element 0 is for 1-length names, and so on.
-    uint[] public rentPrices;
+    // Price by length. Element 0 is for 1-length names, and so on.
+    uint[] public prices;
 
     // Oracle address
     AggregatorInterface public usdOracle;
 
     event OracleChanged(address oracle);
 
-    event RentPriceChanged(uint[] prices);
+    event PriceChanged(uint[] prices);
 
     bytes4 constant private INTERFACE_META_ID = bytes4(keccak256("supportsInterface(bytes4)"));
-    bytes4 constant private ORACLE_ID = bytes4(keccak256("price(string,uint256,uint256)") ^ keccak256("premium(string,uint256,uint256)"));
+    bytes4 constant private ORACLE_ID = bytes4(keccak256("price(string)") ^ keccak256("premium(string)"));
 
-    constructor(AggregatorInterface _usdOracle, uint[] memory _rentPrices) public {
+    constructor(AggregatorInterface _usdOracle, uint[] memory _prices) public {
         usdOracle = _usdOracle;
-        setPrices(_rentPrices);
+        setPrices(_prices);
     }
 
-    function price(string calldata name, uint expires, uint duration) external view override returns(uint) {
+    function price(string calldata name) external view override returns(uint) {
         uint len = name.strlen();
-        if(len > rentPrices.length) {
-            len = rentPrices.length;
+        if(len > prices.length) {
+            len = prices.length;
         }
         require(len > 0);
         
-        uint basePrice = rentPrices[len - 1].mul(duration);
-        basePrice = basePrice.add(_premium(name, expires, duration));
+        uint basePrice = prices[len - 1];
+        basePrice = basePrice.add(_premium(name));
 
         return attoUSDToWei(basePrice);
     }
 
     /**
-     * @dev Sets rent prices.
-     * @param _rentPrices The price array. Each element corresponds to a specific
+     * @dev Sets prices.
+     * @param _prices The price array. Each element corresponds to a specific
      *                    name length; names longer than the length of the array
      *                    default to the price of the last element. Values are
      *                    in base price units, equal to one attodollar (1e-18
      *                    dollar) each.
      */
-    function setPrices(uint[] memory _rentPrices) public onlyOwner {
-        rentPrices = _rentPrices;
-        emit RentPriceChanged(_rentPrices);
+    function setPrices(uint[] memory _prices) public onlyOwner {
+        prices = _prices;
+        emit PriceChanged(_prices);
     }
 
     /**
@@ -71,14 +71,14 @@ contract StablePriceOracle is Ownable, PriceOracle {
     /**
      * @dev Returns the pricing premium in wei.
      */
-    function premium(string calldata name, uint expires, uint duration) external view returns(uint) {
-        return attoUSDToWei(_premium(name, expires, duration));
+    function premium(string calldata name) external view returns(uint) {
+        return attoUSDToWei(_premium(name));
     }
 
     /**
      * @dev Returns the pricing premium in internal base units.
      */
-    function _premium(string memory name, uint expires, uint duration) virtual internal view returns(uint) {
+    function _premium(string memory name) virtual internal view returns(uint) {
         return 0;
     }
 
