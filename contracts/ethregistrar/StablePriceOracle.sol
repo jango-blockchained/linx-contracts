@@ -22,7 +22,6 @@ contract StablePriceOracle is Ownable, PriceOracle {
     AggregatorInterface public usdOracle;
 
     event OracleChanged(address oracle);
-
     event PriceChanged(uint[] prices);
 
     bytes4 constant private INTERFACE_META_ID = bytes4(keccak256("supportsInterface(bytes4)"));

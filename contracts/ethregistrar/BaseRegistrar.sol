@@ -5,8 +5,6 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 abstract contract BaseRegistrar is Ownable, IERC721 {
-    uint constant public GRACE_PERIOD = 90 days;
-
     event ControllerAdded(address indexed controller);
     event ControllerRemoved(address indexed controller);
     event NameRegistered(uint256 indexed id, address indexed owner);
@@ -17,10 +15,10 @@ abstract contract BaseRegistrar is Ownable, IERC721 {
     // The namehash of the TLD this registrar owns (eg, .eth)
     bytes32 public baseNode;
 
-    // A map of addresses that are authorised to register and renew names.
+    // A map of addresses that are authorised to register names.
     mapping(address=>bool) public controllers;
 
-    // Authorises a controller, who can register and renew domains.
+    // Authorises a controller, who can register domains.
     function addController(address controller) virtual external;
 
     // Revoke controller permission for an address.

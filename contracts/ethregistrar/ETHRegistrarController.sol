@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "../resolvers/Resolver.sol";
 
 /**
- * @dev A registrar controller for registering and renewing names at fixed cost.
+ * @dev A registrar controller for registering names at fixed cost.
  */
 contract ETHRegistrarController is Ownable {
     using StringUtils for *;
@@ -103,7 +103,7 @@ contract ETHRegistrarController is Ownable {
                 Resolver(resolver).setAddr(nodehash, addr);
             }
 
-            // Now transfer full ownership to the expeceted owner
+            // Now transfer full ownership to the expected owner
             base.reclaim(tokenId, owner);
             base.transferFrom(address(this), owner, tokenId);
         } else {
