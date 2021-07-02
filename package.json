@@ -27,9 +27,10 @@
     "chai": "^4.3.4",
     "elliptic-solidity": "^1.0.0",
     "ethereum-waffle": "^3.3.0",
-    "ethers": "^5.1.4",
+    "ethers": "^5.4.0",
     "hardhat": "^2.2.1",
     "hardhat-abi-exporter": "^2.2.1",
+    "hardhat-deploy": "^0.8.9",
     "hardhat-gas-reporter": "^1.0.4",
     "rfc4648": "^1.5.0"
   },

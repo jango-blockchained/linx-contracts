@@ -149,12 +149,37 @@ git clone https://github.com/ensdomains/ens-contracts
 cd ens-contracts
 yarn
 ```
+### Deployment
+Update `hardhat.config.js` with your Infura API Key and Deployment account private key.
+
+Specify the `--network` option like ropsten, mainnet, hardhat or localhost.
+
+```
+npx hardhat --network ropsten deploy 
+```
+
+Finalize deployment: updates ens registry  and connects the controller and public resolver to the registrar.
+
+```
+npx hardhat --network ropsten run scripts/finalize.js
+```
+
+Submit contract code to verify with etherscan (optional)
+
+```
+npx hardhat --network ropsten etherscan-verify --license MIT --api-key etherscan_api_key
+```
+
+Note: Deployed contract info are stored in `deployments` directory, running deploy again will reuse any contracts that were deployed previously.
+
 
 ### How to run tests
 
 ```
 yarn test
 ```
+
+
 
 ### How to publish
 

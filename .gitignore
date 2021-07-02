@@ -2,6 +2,9 @@
 node_modules
 build
 
+
 #Hardhat files
 cache
 artifacts
+deployments
+addresses.json

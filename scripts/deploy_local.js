@@ -6,6 +6,8 @@
 const hre = require("hardhat");
 const sha3 = require('web3-utils').sha3;
 
+// Note: this deployment script is only intended for local testing
+// use the deploy scripts in deploy/ instead.
 async function main() {
     // Hardhat always runs the compile task when running scripts with its command
     // line interface.
