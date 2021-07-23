@@ -1,7 +1,7 @@
 {
-  "name": "@ensdomains/ens-contracts",
+  "name": "@imperviousinc/forever-contracts",
   "version": "0.0.4",
-  "description": "ENS contracts",
+  "description": "Forever contracts",
   "scripts": {
     "test": "npx hardhat test",
     "lint": "npx hardhat check",
@@ -49,12 +49,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ensdomains/ens-contracts.git"
+    "url": "git+https://github.com/imperviousinc/forever-contracts.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ensdomains/ens-contracts/issues"
+    "url": "https://github.com/imperviousinc/forever-contracts/issues"
   },
-  "homepage": "https://github.com/ensdomains/ens-contracts#readme"
+  "homepage": "https://github.com/imperviousinc/forever-contracts#readme"
 }

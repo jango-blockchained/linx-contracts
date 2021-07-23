@@ -23,33 +23,33 @@ import {
   ReverseRegistrar,
   StablePriceOracle,
   TestRegistrar
-} from '@ensdomains/ens-contracts'
+} from '@imperviousinc/forever-contracts'
 ```
 
 ## Importing from solidity
 
 ```
 // Registry
-import 'ensdomains-ens-contracts/contracts/registry/ENS.sol';
-import 'ensdomains-ens-contracts/contracts/registry/ENSRegistry.sol';
-import 'ensdomains-ens-contracts/contracts/registry/ENSRegistryWithFallback.sol';
-import 'ensdomains-ens-contracts/contracts/registry/ReverseRegistrar.sol';
-import 'ensdomains-ens-contracts/contracts/registry/TestRegistrar.sol';
+import 'imperviousinc-forever-contracts/contracts/registry/ENS.sol';
+import 'imperviousinc-forever-contracts/contracts/registry/ENSRegistry.sol';
+import 'imperviousinc-forever-contracts/contracts/registry/ENSRegistryWithFallback.sol';
+import 'imperviousinc-forever-contracts/contracts/registry/ReverseRegistrar.sol';
+import 'imperviousinc-forever-contracts/contracts/registry/TestRegistrar.sol';
 // EthRegistrar
-import 'ensdomains-ens-contracts/contracts/ethregistrar/BaseRegistrar.sol';
-import 'ensdomains-ens-contracts/contracts/ethregistrar/BaseRegistrarImplementation.sol';
-import 'ensdomains-ens-contracts/contracts/ethregistrar/BaseRegistrar.sol';
-import 'ensdomains-ens-contracts/contracts/ethregistrar/ETHRegistrarController.sol';
-import 'ensdomains-ens-contracts/contracts/ethregistrar/PriceOracle.sol';
-import 'ensdomains-ens-contracts/contracts/ethregistrar/StablePriceOracle.sol';
+import 'imperviousinc-forever-contracts/contracts/ethregistrar/BaseRegistrar.sol';
+import 'imperviousinc-forever-contracts/contracts/ethregistrar/BaseRegistrarImplementation.sol';
+import 'imperviousinc-forever-contracts/contracts/ethregistrar/BaseRegistrar.sol';
+import 'imperviousinc-forever-contracts/contracts/ethregistrar/ETHRegistrarController.sol';
+import 'imperviousinc-forever-contracts/contracts/ethregistrar/PriceOracle.sol';
+import 'imperviousinc-forever-contracts/contracts/ethregistrar/StablePriceOracle.sol';
 // Resolvers
-import 'ensdomains-ens-contracts/contracts/resolvers/PublicResolver.sol';
-import 'ensdomains-ens-contracts/contracts/resolvers/Resolver.sol';
+import 'imperviousinc-forever-contracts/contracts/resolvers/PublicResolver.sol';
+import 'imperviousinc-forever-contracts/contracts/resolvers/Resolver.sol';
 ```
 
 ##  Accessing to binary file.
 
-If your environment does not have compiler, you can access to the raw hardhat artifacts files at `node_modules/@ensdomains/ens-contracts/artifacts/contracts/${modName}/${contractName}.sol/${contractName}.json`
+If your environment does not have compiler, you can access to the raw hardhat artifacts files at `node_modules/@imperviousinc/forever-contracts/artifacts/contracts/${modName}/${contractName}.sol/${contractName}.json`
 
 
 ## Contracts
