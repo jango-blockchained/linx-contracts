@@ -1,6 +1,6 @@
 {
   "name": "@imperviousinc/forever-contracts",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Forever contracts",
   "scripts": {
     "test": "npx hardhat test",
