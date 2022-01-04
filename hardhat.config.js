@@ -30,7 +30,7 @@ const INFURA_API_KEY = 'acc9fa0a813b40119656cde443e7391d';
 // go to Account Details > Export Private Key
 const PRIVATE_KEY = 'b7e73e2437d34d779f5b02e84664397e';
 
-// using ChainLink USD Oracle on Mainnet or set null to use DummyOracle
+// using ChainLink USD Oracle on Mainnet or set null to use DummyOracle.
 // https://data.chain.link/ethereum/mainnet/crypto-usd/eth-usd
 const MAINNET_USD_ORACLE = '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419';
 
