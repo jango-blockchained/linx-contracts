@@ -142,15 +142,21 @@ PublicResolver includes the following profiles that implements different EIPs.
 
 ## Developer guide
 
-### How to setup
+### Setup
 
 ```
-git clone https://github.com/ensdomains/ens-contracts
-cd ens-contracts
+git clone https://github.com/imperviousinc/forever-contracts.git
+cd forever-contracts
 yarn
 ```
 ### Deployment
-Update `hardhat.config.js` with your Infura API Key and Deployment account private key.
+Create a .env file and add the following variables:
+
+```
+DEPLOYER_KEY=
+INFURA_ID=
+ETHERSCAN_API_KEY=
+```
 
 Specify the `--network` option like ropsten, mainnet, hardhat or localhost.
 
@@ -164,10 +170,16 @@ Finalize deployment: updates ens registry  and connects the controller and publi
 npx hardhat --network ropsten run scripts/finalize.js
 ```
 
+add the new controller
+
+```
+npx hardhat --network ropsten deploy --tags FinalizeForeverController
+```
+
 Submit contract code to verify with etherscan (optional)
 
 ```
-npx hardhat --network ropsten etherscan-verify --license MIT --api-key etherscan_api_key
+npx hardhat --network ropsten etherscan-verify --license MIT
 ```
 
 Note: Deployed contract info are stored in `deployments` directory, running deploy again will reuse any contracts that were deployed previously.
