@@ -16,6 +16,7 @@ module.exports = async ({getNamedAccounts, hardhatArguments, deployments, ethers
             maxCommitmentAge
         ],
         log: true,
+        skipIfAlreadyDeployed: true,
     });
 };
 

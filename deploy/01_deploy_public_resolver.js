@@ -7,6 +7,7 @@ module.exports = async ({getNamedAccounts, deployments}) => {
         from: deployer,
         args: [ENSRegistry.address],
         log: true,
+        skipIfAlreadyDeployed: true,
     });
 };
 

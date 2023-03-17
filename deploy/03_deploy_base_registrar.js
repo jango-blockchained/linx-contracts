@@ -7,6 +7,7 @@ module.exports = async ({getNamedAccounts, deployments, ethers, config}) => {
         from: deployer,
         args: [ENSRegistry.address, ethers.utils.namehash(config.tld)],
         log: true,
+        skipIfAlreadyDeployed: true,
     });
 };
 

@@ -5,6 +5,7 @@ module.exports = async ({getNamedAccounts, deployments}) => {
     await deploy('ENSRegistry', {
         from: deployer,
         log: true,
+        skipIfAlreadyDeployed: true,
     });
 };
 

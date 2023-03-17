@@ -9,7 +9,6 @@ module.exports = async ({getNamedAccounts, hardhatArguments, deployments, ethers
     // check if there is a USD oracle in the config
     if (netConfig && netConfig.usdOracle) {
         oracleAddress = netConfig.usdOracle;
-        console.log('Using USD Oracle with address: ', oracleAddress);
     } else {
         // No USD oracle ... deploy DummyOracle with 1 ETH == 2000 USD
         const dummyOracle = await deploy('DummyOracle', {
@@ -34,6 +33,7 @@ module.exports = async ({getNamedAccounts, hardhatArguments, deployments, ethers
         from: deployer,
         args: [oracleAddress, prices],
         log: true,
+        skipIfAlreadyDeployed: true,
     });
 };
 
