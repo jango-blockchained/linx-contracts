@@ -6,15 +6,12 @@ require("hardhat-gas-reporter");
 require('hardhat-deploy');
 require("@nomiclabs/hardhat-ethers");
 
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async () => {
-  const accounts = await ethers.getSigners();
+// Load environment variables from .env file. Suppress warnings using silent
+// if this file is missing. dotenv will never modify any environment variables
+// that have already been set.
+// https://github.com/motdotla/dotenv
+require('dotenv').config({ silent: true });
 
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -22,19 +19,18 @@ task("accounts", "Prints the list of accounts", async () => {
 // TLD to use in deployment
 const TLD = 'forever';
 
-// Go to https://www.infura.io
-const INFURA_API_KEY = 'INFURA PROJECT ID';
-
 // Replace this private key with your account private key
 // To export your private key from Metamask, open Metamask and
 // go to Account Details > Export Private Key
-const PRIVATE_KEY = '';
+real_accounts = undefined
+if (process.env.DEPLOYER_KEY) {
+  real_accounts = [process.env.DEPLOYER_KEY]
+}
 
 // using ChainLink USD Oracle on Mainnet or set null to use DummyOracle
 // https://data.chain.link/ethereum/mainnet/crypto-usd/eth-usd
 const MAINNET_USD_ORACLE = '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419';
 
-const accountKey = (PRIVATE_KEY === '' ? '0x00' : '0x' + PRIVATE_KEY);
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
@@ -43,14 +39,14 @@ module.exports = {
   tld: TLD,
   networks: {
     mainnet: {
-      url: "https://mainnet.infura.io/v3/" + INFURA_API_KEY,
+      url: `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`,
       usdOracle: MAINNET_USD_ORACLE,
-      accounts: [ accountKey ],
+      accounts: real_accounts,
       tags: ["production"]
     },
     ropsten: {
-      url: "https://ropsten.infura.io/v3/" + INFURA_API_KEY,
-      accounts: [ accountKey ],
+      url: `https://ropsten.infura.io/v3/${process.env.INFURA_ID}`,
+      accounts: real_accounts,
       usdOracle: '0xa92F3BE2dFf40c82b902Ffa82e50B1db414bC7E1',
       tags: ["staging"]
     },
@@ -77,15 +73,21 @@ module.exports = {
     flat: true,
     spacing: 2
   },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
+  },
   solidity: {
     compilers: [
       {
-        version: "0.8.4"
-      },
-      {
         version: "0.8.4",
-      }
-    ]
-  }
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 10000,
+          },
+        },
+      },
+    ],
+  },
 };
 
