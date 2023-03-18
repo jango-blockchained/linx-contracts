@@ -150,6 +150,7 @@ cd forever-contracts
 yarn
 ```
 ### Deployment
+
 Create a .env file and add the following variables:
 
 ```
@@ -158,32 +159,29 @@ INFURA_ID=
 ETHERSCAN_API_KEY=
 ```
 
-Specify the `--network` option like ropsten, mainnet, hardhat or localhost.
+Deploy the contracts:
 
 ```
-npx hardhat --network ropsten deploy 
+npx hardhat --network goerli deploy 
 ```
 
 Finalize deployment: updates ens registry  and connects the controller and public resolver to the registrar.
 
 ```
-npx hardhat --network ropsten run scripts/finalize.js
+npx hardhat --network goerli deploy --tags FinalizeInitial
 ```
 
 add the new controller
 
 ```
-npx hardhat --network ropsten deploy --tags FinalizeForeverController
+npx hardhat --network goerli deploy --tags FinalizeForeverController
 ```
 
 Submit contract code to verify with etherscan (optional)
 
 ```
-npx hardhat --network ropsten etherscan-verify --license MIT
+npx hardhat --network goerli etherscan-verify --license MIT --sleep
 ```
-
-Note: Deployed contract info are stored in `deployments` directory, running deploy again will reuse any contracts that were deployed previously.
-
 
 ### How to run tests
 

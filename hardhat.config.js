@@ -44,8 +44,8 @@ module.exports = {
       accounts: real_accounts,
       tags: ["production"]
     },
-    ropsten: {
-      url: `https://ropsten.infura.io/v3/${process.env.INFURA_ID}`,
+    goerli: {
+      url: `https://goerli.infura.io/v3/${process.env.INFURA_ID}`,
       accounts: real_accounts,
       usdOracle: '0xa92F3BE2dFf40c82b902Ffa82e50B1db414bC7E1',
       tags: ["staging"]
